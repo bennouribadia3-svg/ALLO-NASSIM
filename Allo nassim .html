@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Allo Nassim | دليفري الجديدة</title>
+
+<style>
+:root{
+  --main:#00c853;
+  --bg:#0f172a;
+  --card:#1e293b;
+}
+
+body{
+  font-family:'Segoe UI';
+  background:var(--bg);
+  color:white;
+  margin:0;
+  padding:15px;
+}
+
+/* HEADER */
+header{
+  text-align:center;
+  margin-bottom:25px;
+}
+header h1{
+  color:var(--main);
+  margin:0;
+  font-size:28px;
+}
+header p{
+  opacity:.7;
+}
+
+/* CATEGORY */
+.category{
+  background:var(--main);
+  color:black;
+  padding:6px 15px;
+  border-radius:50px;
+  display:inline-block;
+  font-weight:bold;
+  margin:15px 0;
+}
+
+/* CARD */
+.card{
+  background:var(--card);
+  border-radius:14px;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+  box-shadow:0 6px 15px rgba(0,0,0,.4);
+  transition:.2s;
+}
+.card:hover{
+  transform:scale(1.02);
+}
+
+.info h3{
+  margin:0;
+}
+.info p{
+  margin:5px 0 0;
+  font-size:13px;
+  color:#aaa;
+}
+
+.price{
+  color:var(--main);
+  font-weight:bold;
+}
+
+/* BUTTON */
+.btn{
+  border:2px solid var(--main);
+  background:none;
+  color:var(--main);
+  padding:7px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:.2s;
+}
+.btn:hover{
+  background:var(--main);
+  color:black;
+}
+
+/* MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+}
+
+.box{
+  background:var(--card);
+  max-width:400px;
+  margin:20% auto;
+  padding:20px;
+  border-radius:12px;
+}
+
+input,textarea{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  background:#0f172a;
+  border:1px solid #333;
+  color:white;
+  border-radius:8px;
+}
+
+.wa{
+  display:block;
+  text-align:center;
+  background:#25d366;
+  padding:13px;
+  border-radius:8px;
+  text-decoration:none;
+  color:white;
+  font-weight:bold;
+}
+
+.close{
+  text-align:center;
+  margin-top:10px;
+  cursor:pointer;
+  opacity:.7;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>ALLO NASSIM 🍟</h1>
+<p>أسرع دليفري فالجديدة 🚀</p>
+</header>
+
+<div class="category">🔥 الأكثر طلباً</div>
+
+<div class="card">
+<div class="info">
+<h3>سندويش ميكس</h3>
+<p>كفتة، دجاج، صوص، فريت</p>
+</div>
+<div class="price">30 DH</div>
+<button class="btn" onclick="openOrder('سندويش ميكس')">طلب</button>
+</div>
+
+<div class="card">
+<div class="info">
+<h3>بوكاديوس</h3>
+<p>طون، بيض، خضر</p>
+</div>
+<div class="price">20 DH</div>
+<button class="btn" onclick="openOrder('بوكاديوس')">طلب</button>
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+<div class="box">
+
+<h3 id="title" style="color:var(--main)"></h3>
+
+<input id="name" placeholder="الإسم الكامل">
+<input id="addr" placeholder="العنوان">
+<textarea id="note" placeholder="ملاحظات مثل : بدون بصل ، بدون حار..."></textarea>
+
+<a id="wa" class="wa">تأكيد عبر واتساب</a>
+
+<div class="close" onclick="closeModal()">رجوع</div>
+
+</div>
+</div>
+
+<script>
+let item="";
+const phone="212609188741";
+
+function openOrder(n){
+  item=n;
+  document.getElementById("title").innerText="طلب: "+n;
+  document.getElementById("modal").style.display="block";
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display="none";
+}
+
+document.getElementById("wa").onclick=function(e){
+  let n=document.getElementById("name").value;
+  let a=document.getElementById("addr").value;
+  let note=document.getElementById("note").value;
+
+  if(!n || !a){
+    alert("عمر الإسم والعنوان");
+    e.preventDefault();
+    return;
+  }
+
+  let msg=`طلب جديد%0A🍔 ${item}%0A👤 ${n}%0A📍 ${a}%0A📝 ${note}`;
+  this.href=`https://wa.me/${phone}?text=${msg}`;
+}
+</script>
+
+</body>
+</html>
